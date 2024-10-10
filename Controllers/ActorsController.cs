@@ -43,6 +43,7 @@ public class ActorsController : ControllerBase
         {
             return Unauthorized("Invalid or missing token.");
         }
+
         // Scrape actors from the service
         var scrapedActors = await _scraperService.ScrapeActorsAsync();
 
