@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SplititScraperApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b4acc5f6fb1e8fb9ac45f520d8e3e40fbe49dfb")]
 [assembly: System.Reflection.AssemblyProductAttribute("SplititScraperApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SplititScraperApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

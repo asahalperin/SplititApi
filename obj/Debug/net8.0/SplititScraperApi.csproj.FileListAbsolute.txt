@@ -34,3 +34,13 @@ C:\Users\nofarh\source\repos\SplititScraperApi\obj\Debug\net8.0\refint\SplititSc
 C:\Users\nofarh\source\repos\SplititScraperApi\obj\Debug\net8.0\SplititScraperApi.pdb
 C:\Users\nofarh\source\repos\SplititScraperApi\obj\Debug\net8.0\SplititScraperApi.genruntimeconfig.cache
 C:\Users\nofarh\source\repos\SplititScraperApi\obj\Debug\net8.0\ref\SplititScraperApi.dll
+C:\Users\nofarh\source\repos\SplititScraperApi\obj\Debug\net8.0\SplititScraperApi.sourcelink.json
+C:\Users\nofarh\source\repos\SplititScraperApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\nofarh\source\repos\SplititScraperApi\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\nofarh\source\repos\SplititScraperApi\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\nofarh\source\repos\SplititScraperApi\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\nofarh\source\repos\SplititScraperApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\nofarh\source\repos\SplititScraperApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\nofarh\source\repos\SplititScraperApi\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\nofarh\source\repos\SplititScraperApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\nofarh\source\repos\SplititScraperApi\bin\Debug\net8.0\Newtonsoft.Json.dll

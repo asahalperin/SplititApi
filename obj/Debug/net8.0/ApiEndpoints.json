@@ -1,8 +1,59 @@
 [
   {
     "ContainingType": "ActorsController",
+    "Method": "ScrapeActors",
+    "RelativePath": "api/v1/Actors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "actorName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "minRank",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxRank",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "skip",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "take",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ActorsController",
     "Method": "AddActor",
-    "RelativePath": "api/Actors",
+    "RelativePath": "api/v1/Actors",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -28,7 +79,7 @@
   {
     "ContainingType": "ActorsController",
     "Method": "GetActorById",
-    "RelativePath": "api/Actors/{id}",
+    "RelativePath": "api/v1/Actors/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -54,7 +105,7 @@
   {
     "ContainingType": "ActorsController",
     "Method": "UpdateActor",
-    "RelativePath": "api/Actors/{id}",
+    "RelativePath": "api/v1/Actors/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -75,7 +126,7 @@
   {
     "ContainingType": "ActorsController",
     "Method": "DeleteActor",
-    "RelativePath": "api/Actors/{id}",
+    "RelativePath": "api/v1/Actors/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -87,51 +138,5 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ActorsController",
-    "Method": "ScrapeActors",
-    "RelativePath": "api/Actors/scrape",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "name",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "minRank",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "maxRank",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageNumber",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   }
 ]

@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using SplititScraperApi.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;

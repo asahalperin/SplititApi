@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using System;
 using SplititScraperApi.Models;
 
+
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 public class ActorsController : ControllerBase
 {
     private readonly ScraperService _scraperService;
+    private readonly TokenStorage _tokenStorage;  // Inject TokenStorage
+
 
     // Separate list for manually added actors
     private static List<Actor> _manuallyAddedActors = new List<Actor>();
@@ -17,21 +20,29 @@ public class ActorsController : ControllerBase
     // Main list for actors (scraped + manually added)
     private static List<Actor> _actors = new List<Actor>();
 
-    public ActorsController(ScraperService scraperService)
+    //private static string token = "Bearer 1234567890";
+
+    public ActorsController(ScraperService scraperService, TokenStorage tokenStorage)
     {
         _scraperService = scraperService;
+        _tokenStorage = tokenStorage;  // Initialize the token storage
     }
 
-    // GET: api/actors/scrape
-    [HttpGet("scrape")]
+    // GET: api/v1/actors
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<object>>> ScrapeActors(
-        [FromQuery] string name = null,
+        [FromQuery] string actorName = null,
         [FromQuery] int? minRank = null,
         [FromQuery] int? maxRank = null,
-        [FromQuery] int? pageNumber = null,
-        [FromQuery] int? pageSize = null
+        [FromHeader] int? skip = null,
+        [FromHeader] int? take = null,
+        [FromHeader] string Authorization = null
     )
     {
+        if (Authorization == null || !Authorization.Equals($"Bearer {_tokenStorage.GeneratedToken}"))
+        {
+            return Unauthorized("Invalid or missing token.");
+        }
         // Scrape actors from the service
         var scrapedActors = await _scraperService.ScrapeActorsAsync();
 
@@ -41,12 +52,12 @@ public class ActorsController : ControllerBase
         // Add manually added actors back to the main list
         _actors.AddRange(_manuallyAddedActors);
 
-        // Filtering by name
+        // Filtering by actorName
         var filteredActors = _actors;
 
-        if (!string.IsNullOrEmpty(name))
+        if (!string.IsNullOrEmpty(actorName))
         {
-            filteredActors = filteredActors.Where(a => a.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+            filteredActors = filteredActors.Where(a => a.Name.Contains(actorName, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         // Filtering by rank (as range)
@@ -60,14 +71,14 @@ public class ActorsController : ControllerBase
             filteredActors = filteredActors.Where(a => a.Rank <= maxRank.Value).ToList();
         }
 
-        // Pagination: Apply pagination only if pageNumber and pageSize are provided
-        if (pageNumber.HasValue && pageSize.HasValue)
+        // Pagination: Apply pagination only if skip and take are provided
+        if (skip.HasValue && take.HasValue)
         {
             var totalActors = filteredActors.Count;
-            var totalPages = (int)Math.Ceiling(totalActors / (double)pageSize.Value);
+            var totalPages = (int)Math.Ceiling(totalActors / (double)take.Value);
             var paginatedActors = filteredActors
-                .Skip((pageNumber.Value - 1) * pageSize.Value)
-                .Take(pageSize.Value)
+                .Skip((skip.Value - 1) * take.Value)
+                .Take(take.Value)
                 .Select(a => new { a.Id, a.Name })
                 .ToList();
 
@@ -76,8 +87,8 @@ public class ActorsController : ControllerBase
             {
                 TotalActors = totalActors,
                 TotalPages = totalPages,
-                CurrentPage = pageNumber.Value,
-                PageSize = pageSize.Value,
+                CurrentPage = skip.Value,
+                PageSize = take.Value,
                 Actors = paginatedActors
             });
         }
@@ -86,7 +97,7 @@ public class ActorsController : ControllerBase
         return Ok(filteredActors.Select(a => new { a.Id, a.Name }).ToList());
     }
 
-    // POST: api/actors - Add a new actor
+    // POST: api/v1/actors - Add a new actor
     [HttpPost]
     public ActionResult<Actor> AddActor([FromBody] Actor newActor)
     {
@@ -108,7 +119,7 @@ public class ActorsController : ControllerBase
         return CreatedAtAction(nameof(GetActorById), new { id = newActor.Id }, newActor);
     }
 
-    // GET: api/actors/{id} - Get details of a specific actor
+    // GET: api/v1/actors/{id} - Get details of a specific actor
     [HttpGet("{id}")]
     public ActionResult<Actor> GetActorById(int id)
     {
@@ -120,7 +131,7 @@ public class ActorsController : ControllerBase
         return Ok(actor); // Return full actor model
     }
 
-    // PUT: api/actors/{id} - Update an actor's details
+    // PUT: api/v1/actors/{id} - Update an actor's details
     [HttpPut("{id}")]
     public ActionResult UpdateActor(int id, [FromBody] Actor updatedActor)
     {
@@ -155,7 +166,7 @@ public class ActorsController : ControllerBase
 
 
 
-    // DELETE: api/actors/{id} - Delete an actor
+    // DELETE: api/v1/actors/{id} - Delete an actor
     [HttpDelete("{id}")]
     public ActionResult DeleteActor(int id)
     {
